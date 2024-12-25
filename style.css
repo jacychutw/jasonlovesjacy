@@ -220,7 +220,62 @@ hr {
   }
 }
 
+
+
+
+
+
+
+
+
+
 .parallax-section {
+  position: relative;
+  /* 保持隨頁面滾動 */
+  height: 360px;
+  /* 窗戶高度 */
+  margin-bottom: 40px;
+  /* 分隔其他內容 */
+  overflow: hidden;
+  /* 隱藏超出部分 */
+}
+
+.parallax-bg {
+  position: absolute;
+  top: -120px;
+  bottom: -200px;
+  left: 0;
+  width: 100%;
+  height: 150%;
+  /* 背景比窗口略大，方便視差效果 */
+  background-image: url('./img/parallax-bg.png');
+  /* 背景圖片 */
+  background-size: cover;
+  background-position: center;
+  transform: translateY(0);
+  /* 初始位置 */
+}
+
+.parallax-text {
+  position: absolute;
+  top: 50%;
+  /* 垂直居中 */
+  left: 50%;
+  /* 水平居中 */
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+
+
+/* .parallax-section {
   height: 360px;
   margin-bottom: 60px;
   background-image: url('./img/parallax-bg.png');
@@ -228,6 +283,14 @@ hr {
   background-size: cover;
   background-attachment: fixed;
   position: relative;
+}
+
+@media (max-width: 800px) {
+  .parallax-section {
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center;
+  }
 }
 
 .parallax-text {
@@ -240,7 +303,7 @@ hr {
   text-align: center;
   font-size: 1.5rem;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-}
+} */
 
 .footer {
   background-color: #BDADC5;

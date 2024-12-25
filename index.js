@@ -112,6 +112,27 @@ initializePages();
 
 document.addEventListener("DOMContentLoaded", () => {
   AOS.init();
+
+  const parallaxSections = document.querySelectorAll(".parallax-section");
+
+  function handleParallax() {
+    parallaxSections.forEach((section) => {
+      const bg = section.querySelector(".parallax-bg");
+      const rect = section.getBoundingClientRect();
+      const speed = 0.5;
+
+      const offset = rect.top * speed * -0.6;
+
+      if (bg) {
+        bg.style.transform = `translateY(${offset}px)`;
+      }
+    });
+  }
+
+  window.addEventListener("scroll", handleParallax);
+
+  handleParallax();
+
   const textElements = document.querySelectorAll('.his-her-eyes');
   const speed = 240;
   const interval = 12000;
