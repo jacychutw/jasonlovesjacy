@@ -1,3 +1,82 @@
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #BDADC5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.heart {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background-color: #ffe9e9;
+  transform: rotate(-45deg);
+  animation: heart-float 3s infinite ease-in-out;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #ffe9e9;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -10px;
+  left: 0;
+}
+
+.heart::after {
+  top: 0;
+  left: 10px;
+}
+
+@keyframes heart-float {
+  0% {
+    transform: translateY(0) rotate(-45deg);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(-30px) rotate(-45deg);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateY(-60px) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+.loading-text {
+  margin-top: 20px;
+  font-size: 16px;
+  font-family: 'Mate SC', serif;
+  color: #ffffff;
+  animation: fade-in-out 3s infinite;
+}
+
+@keyframes fade-in-out {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
 :root {
   font-size: 14px;
   box-sizing: border-box;
@@ -132,6 +211,8 @@ hr {
   font-size: 12px;
   padding: 60px 120px;
   line-height: 24px;
+  margin-bottom: 40px;
+  margin-top: 20px;
 }
 
 @media (max-width: 500px) {
@@ -187,6 +268,7 @@ hr {
     padding: 40px;
     line-height: 24px;
     margin-bottom: 40px;
+    margin-top: 0px;
   }
 }
 
@@ -235,24 +317,11 @@ hr {
   }
 }
 
-
-
-
-
-
-
-
-
-
 .parallax-section {
   position: relative;
-  /* 保持隨頁面滾動 */
   height: 360px;
-  /* 窗戶高度 */
   margin-bottom: 40px;
-  /* 分隔其他內容 */
   overflow: hidden;
-  /* 隱藏超出部分 */
 }
 
 .parallax-bg {
@@ -262,50 +331,10 @@ hr {
   left: 0;
   width: 100%;
   height: 150%;
-  /* 背景比窗口略大，方便視差效果 */
   background-image: url('./img/parallax-bg.png');
-  /* 背景圖片 */
   background-size: cover;
   background-position: center;
   transform: translateY(0);
-  /* 初始位置 */
-}
-
-.parallax-text {
-  position: absolute;
-  top: 50%;
-  /* 垂直居中 */
-  left: 50%;
-  /* 水平居中 */
-  transform: translate(-50%, -50%);
-  color: white;
-  font-weight: bold;
-  text-align: center;
-  font-size: 1.5rem;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-}
-
-
-
-
-
-
-/* .parallax-section {
-  height: 360px;
-  margin-bottom: 60px;
-  background-image: url('./img/parallax-bg.png');
-  background-position: 50% 50%;
-  background-size: cover;
-  background-attachment: fixed;
-  position: relative;
-}
-
-@media (max-width: 800px) {
-  .parallax-section {
-    background-attachment: scroll;
-    background-size: cover;
-    background-position: center;
-  }
 }
 
 .parallax-text {
@@ -318,7 +347,7 @@ hr {
   text-align: center;
   font-size: 1.5rem;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-} */
+}
 
 .footer {
   background-color: #BDADC5;
@@ -349,13 +378,6 @@ hr {
 .text-area {
   flex: 1;
 }
-
-/* .his-her-eyes {
-  margin: 0;
-  width: 120px;
-  font-family: 'Mate SC', serif;
-} */
-
 
 .his-her-eyes {
   font-family: 'Mate SC', serif;
@@ -426,11 +448,6 @@ hr {
   font-size: 14px;
   line-height: 2.5;
 }
-
-/* .activity-description {
-  font-size: 1rem;
-  line-height: 2.5;
-} */
 
 .activity-image-area {
   display: flex;
@@ -554,7 +571,7 @@ hr {
 .travel-section-background {
   width: 100%;
   background-color: #F7FCFD;
-  padding: 60px 0px;
+  padding: 40px 0px;
 }
 
 .travel-section {
@@ -828,7 +845,7 @@ hr {
   bottom: 6px;
   right:  6px;
   font-family: "Georgia", serif;
- }
+}
 
 /* Frame 1 */
 .frame-1-left {

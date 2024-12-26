@@ -2,27 +2,22 @@ var right = document.getElementsByClassName("right");
 var prevBtn = document.getElementById("prev");
 var nextBtn = document.getElementById("next");
 
-var currentIndex = 1; // 初始化索引為 1，從 page1 開始
-var z = 1; // z-index 層級
+var currentIndex = 1;
+var z = 1;
 
-// 初始化頁面
 function initializePages() {
   for (var i = 0; i < right.length; i++) {
-    // 設定 z-index
     right[i].style.zIndex = right.length - i;
 
-    // 控制翻頁狀態
     if (i < currentIndex) {
       right[i].classList.add("flip"); // 左邊頁面展開
     } else {
       right[i].classList.remove("flip"); // 右邊頁面閉合
     }
 
-    // 控制顯示左邊或右邊內容
     var leftPage = right[i].querySelector(".back");
     var rightPage = right[i].querySelector(".front");
 
-    // 動態調整左頁和右頁的透明度
     if (i === currentIndex - 1) {
       leftPage.style.opacity = "1"; // 左頁可見
     } else {
@@ -39,7 +34,6 @@ function initializePages() {
   updateButtons();
 }
 
-// 下一頁
 function turnRight() {
   if (currentIndex < right.length - 1) {
     right[currentIndex].classList.add("flip");
@@ -51,7 +45,6 @@ function turnRight() {
   }
 }
 
-// 上一頁
 function turnLeft() {
   if (currentIndex > 1) {
     currentIndex--;
@@ -63,7 +56,6 @@ function turnLeft() {
   }
 }
 
-// 更新頁面的透明度
 function updatePageOpacity() {
   for (var i = 0; i < right.length; i++) {
     var leftPage = right[i].querySelector(".back");
@@ -112,6 +104,16 @@ initializePages();
 
 document.addEventListener("DOMContentLoaded", () => {
   AOS.init();
+
+  const loading = document.getElementById("loading");
+  setTimeout(() => {
+    loading.style.transition = "opacity 10s ease";
+    loading.style.opacity = "0";
+    window.scrollTo(0, 0);
+  }, 8200);
+  setTimeout(() => {
+    loading.style.visibility = "hidden";
+  }, 9600);
 
   const parallaxSections = document.querySelectorAll(".parallax-section");
 
@@ -163,18 +165,9 @@ document.addEventListener("DOMContentLoaded", () => {
     startTyping(element);
   });
 
-
   const boxes = document.querySelectorAll(".box");
 
   const imagesSet1 = [
-    "./img/front-3.png",
-    "./img/front-4.png",
-    "./img/front-5.png",
-    "./img/front-2.png",
-    "./img/front-1.png",
-  ];
-
-  const imagesSet2 = [
     "./img/back-2.png",
     "./img/back-4.png",
     "./img/back-5.png",
@@ -182,29 +175,34 @@ document.addEventListener("DOMContentLoaded", () => {
     "./img/back-1.png",
   ];
 
+  const imagesSet2 = [
+    "./img/front-3.png",
+    "./img/front-4.png",
+    "./img/front-5.png",
+    "./img/front-2.png",
+    "./img/front-1.png",
+  ];
+
   let isSet1 = true;
 
-  // 初始化每個 box，加入兩個 <div class="image">
   boxes.forEach((box, index) => {
     const image1 = document.createElement("div");
-    image1.classList.add("image", "active"); // 初始圖片
+    image1.classList.add("image", "active");
     image1.style.backgroundImage = `url('${imagesSet1[index]}')`;
 
     const image2 = document.createElement("div");
-    image2.classList.add("image", "inactive"); // 隱藏的圖片
+    image2.classList.add("image", "inactive");
     image2.style.backgroundImage = `url('${imagesSet2[index]}')`;
 
     box.appendChild(image1);
     box.appendChild(image2);
   });
 
-  // 定義切換函數
   const switchImages = () => {
     boxes.forEach((box) => {
       const activeImage = box.querySelector(".image.active");
       const inactiveImage = box.querySelector(".image.inactive");
 
-      // 切換圖片的 class
       activeImage.classList.remove("active");
       activeImage.classList.add("inactive");
 
@@ -212,10 +210,8 @@ document.addEventListener("DOMContentLoaded", () => {
       inactiveImage.classList.add("active");
     });
 
-    // 切換圖片組
     isSet1 = !isSet1;
 
-    // 更新 inactive 圖片的背景
     boxes.forEach((box, index) => {
       const inactiveImage = box.querySelector(".image.inactive");
       const newImage = isSet1 ? imagesSet2[index] : imagesSet1[index];
@@ -223,6 +219,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  // 每 8 秒切換一次圖片
   setInterval(switchImages, 8000);
+
+  function adjustText() {
+    const meetupText = document.getElementById("meetup-text");
+    if (window.innerWidth < 780) {
+      meetupText.innerHTML =
+        "二〇二二年底相遇，隔年二月十四日正式交往，<br>選擇在二〇二五年一月二十三日戶政登記成為夫妻。<br>兩年來見證彼此的成長，看到對方最真實的模樣，<br>學會在困難中彼此支撐，也在幸福中彼此感恩。";
+    } else {
+      meetupText.innerHTML =
+        "二〇二二年底相遇，隔年年二月十四日正式交往，選擇在二〇二五年一月二十三日戶政登記成為夫妻。<br>兩年來見證彼此的成長，看到對方最真實的模樣，學會在困難中彼此支撐，也在幸福中彼此感恩。";
+    }
+  }
+
+  adjustText();
+  window.addEventListener("resize", adjustText);
 });
